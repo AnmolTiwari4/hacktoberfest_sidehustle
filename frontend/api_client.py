@@ -19,7 +19,7 @@ def _configured_api_url() -> str:
             value = st.secrets.get("API_BASE_URL")
         except Exception:
             value = None
-    return (value or "http://127.0.0.1:8000").rstrip("/")
+    return (value or "https://hacktoberfest-sidehustle.onrender.com").rstrip("/")
 
 
 API_BASE_URL = _configured_api_url()

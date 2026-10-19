@@ -1,6 +1,23 @@
 """MarketScout AI Streamlit dashboard."""
 
+import os
+from pathlib import Path
+
 import streamlit as st
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parents[1] / ".env", override=False)
+
+try:
+    configured_api_url = st.secrets.get("API_BASE_URL")
+except Exception:
+    configured_api_url = None
+
+API_BASE_URL = (
+    configured_api_url
+    or os.getenv("API_BASE_URL", "https://hacktoberfest-sidehustle.onrender.com")
+).rstrip("/")
+os.environ["API_BASE_URL"] = API_BASE_URL
 
 from api_client import APIError, get_health, list_businesses, list_leads
 
